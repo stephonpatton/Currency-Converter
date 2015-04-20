@@ -52,7 +52,7 @@ public class Currency {
 	public double getDollars() {
 		if(unit == DOLLAR) return amount;
 		 else if(unit == POUND) return amount*1.49;
-		 else if(unit == YEN) return amount*120.07;
+		 else if(unit == YEN) return amount*.0084;
 		 else System.out.println("Invalid unit to convert to dollars");
 		return getDollars();
 	}
@@ -60,15 +60,15 @@ public class Currency {
 	public double getPounds() {
 		if(unit == POUND) return amount;
 		else if(unit == DOLLAR) return amount*.68;
-		else if(unit  == YEN) return amount*177.88;
+		else if(unit  == YEN) return amount*.0056;
 		else System.out.println("Invalid unit to convert");
 		return getPounds();
 	}
 	
 	public double getYen() {
 		if(unit == YEN) return amount;
-		else if(unit == DOLLAR) return amount*.0084;
-		else if(unit  == POUND) return amount*.0056;
+		else if(unit == DOLLAR) return amount*120.07;
+		else if(unit  == POUND) return amount*177.88;
 		else System.out.println("Invalid unit to convert");
 		return getYen();
 	}
