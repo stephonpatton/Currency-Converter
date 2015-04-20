@@ -11,23 +11,18 @@ public class Currency {
 	
 	public Currency() {
 		this.set(5.0, DOLLAR);
-//		this(0.0, (char)36);
 	}
 	
 	public Currency(double value) {
-//		this.amount =  value;
 		this(value, (char)36);
 	}
 	public Currency(char unit) {
-//		this.unit = unit;
 		this(0.0, (char)unit);
 	}
 	
 	public Currency(double value, char unit) {
 		this.setAmount(value);
 		this.setUnit((char)unit);
-//		this.amount = value;
-//		this.unit = unit;
 	}
 	
 	public Currency(Currency amount) {
@@ -72,21 +67,19 @@ public class Currency {
 	}
 	
 	public boolean equals(Currency otherAmount) {
-		char tempUnit1 = this.unit;
-		char tempUnit2 = otherAmount.unit;
 		double tempAmount1 = this.amount;
 		double tempAmount2 = otherAmount.amount;
 		
-		if(tempUnit1 == DOLLAR) {
-			tempAmount2 = getDollars();
+		if(otherAmount.unit == DOLLAR) {
+			tempAmount1 = getDollars();
 				return tempAmount1 == tempAmount2;
 		}
-		else if(tempUnit1 == POUND){
-			tempAmount2 = getPounds();
+		else if(otherAmount.unit == POUND){
+			tempAmount1 = getPounds();
 			return tempAmount1 == tempAmount2;
 		}
-		else if(tempUnit1 == YEN) {
-			tempAmount2 = getYen();
+		else if(otherAmount.unit == YEN) {
+			tempAmount1 = getYen();
 			return tempAmount1 == tempAmount2;
 		}
 		return this.equals(otherAmount);
@@ -96,15 +89,36 @@ public class Currency {
 		double temp1 = this.amount;
 		double temp2 = otherAmount.amount;
 		
-		if(!equals(otherAmount)) {
-			
-			
-		}
-		return true;
+			if(otherAmount.unit == DOLLAR) {
+				temp1 = getDollars();
+				return temp1 < temp2;
+			}
+			else if(otherAmount.unit == POUND) {
+				temp1 = getPounds();
+				return temp1 < temp2;
+			} else if(otherAmount.unit == YEN) {
+				temp1 = getYen();
+				return temp1 < temp2;
+			}
+		return this.lessThan(otherAmount);
 	}
 	
 	public boolean greaterThan(Currency otherAmount) {
-		return true;
+		double temp1 = this.amount;
+		double temp2 = otherAmount.amount;
+		
+			if(otherAmount.unit == DOLLAR) {
+				temp1 = getDollars();
+				return temp1 > temp2;
+			}
+			else if(otherAmount.unit == POUND) {
+				temp1 = getPounds();
+				return temp1 > temp2;
+			} else if(otherAmount.unit == YEN) {
+				temp1 = getYen();
+				return temp1 > temp2;
+			}
+		return this.greaterThan(otherAmount);
 	}
 	
 	public void deposit(Currency amount) {
