@@ -141,22 +141,4 @@ public class Currency {
 		System.out.println(YEN + "" + df.format(getYen()));
 	}
 	
-	public void unitConversion(Currency otherAmount) {
-		Currency tu = otherAmount;
-		char tempUnit1 = this.unit;
-		char tempUnit2 = otherAmount.unit;
-		double tempAmount1 = this.amount;
-		double tempAmount2 = otherAmount.amount;
-		boolean sameUnit = tempUnit1 == tempUnit2;
-		boolean sameAmount = tempAmount1 == tempAmount2;
-		
-		if(!sameUnit && !sameAmount) {
-			if(tempUnit1 == DOLLAR) 
-				tu.getDollars();
-			else if(tempUnit1 == POUND)
-				tu.getPounds();
-			else if(tempUnit1 == YEN)
-				tu.getYen();
-		} 
-	}
 }
