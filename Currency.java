@@ -129,7 +129,26 @@ public class Currency {
 	}
 	
 	public void deposit(Currency amount) {
+		boolean sameUnit = this.unit == amount.unit;
+		double tempAmount1 = this.amount;
+		double tempAmount2 = amount.amount;
 		
+			if(amount.unit == DOLLAR) {
+				tempAmount1 = getDollars();
+				tempAmount1 += tempAmount2;
+				return;
+			}else if(amount.unit == POUND) {
+				tempAmount1 = getPounds();
+				tempAmount1 += tempAmount2;
+				return;
+			}else if(amount.unit == YEN) {
+				tempAmount1 = getYen();
+				tempAmount1 += tempAmount2;
+				return;
+			} else {
+				tempAmount1 += tempAmount2;
+				return;
+			}
 	}
 	
 	public void withdraw(Currency amount) {
