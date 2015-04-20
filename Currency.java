@@ -1,3 +1,10 @@
+/*Conversion rates:
+ * 1 USD = .68 Pounds, 120.07 yen
+ * 1 Pound = 1.49 USD, 177.88 yen
+ * 1 Yen = .0084 USD, .0056 Pounds
+ */
+
+
 import java.text.DecimalFormat;
 public class Currency {
 	DecimalFormat df = new DecimalFormat("#.00");
@@ -53,15 +60,15 @@ public class Currency {
 	public double getPounds() {
 		if(unit == POUND) return amount;
 		else if(unit == DOLLAR) return amount*.68;
-		else if(unit  == YEN) return getDollars()*.68;
+		else if(unit  == YEN) return amount*177.88;
 		else System.out.println("Invalid unit to convert");
 		return getPounds();
 	}
 	
 	public double getYen() {
 		if(unit == YEN) return amount;
-		else if(unit == DOLLAR) return amount*120.07;
-		else if(unit  == POUND) return getDollars()*120.07;
+		else if(unit == DOLLAR) return amount*.0084;
+		else if(unit  == POUND) return amount*.0056;
 		else System.out.println("Invalid unit to convert");
 		return getYen();
 	}
