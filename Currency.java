@@ -12,9 +12,9 @@ public class Currency {
 	private double amount;
 	private char unit;	
 	
-	private final static char DOLLAR = 36;
-	private final static  char POUND = 163;
-	private final static char YEN = 165;
+	private final char DOLLAR = 36;
+	private final char POUND = 163;
+	private final char YEN = 165;
 	
 	public Currency() {
 		this.set(5.0, DOLLAR);
@@ -34,6 +34,7 @@ public class Currency {
 	
 	public Currency(Currency amount) {
 		this.amount = amount.amount;
+		this.unit = amount.unit;
 	}
 	
 	public void setUnit(char unit) {
@@ -50,43 +51,42 @@ public class Currency {
 	}
 	
 	public double getDollars() {
-		if(unit == DOLLAR) return amount;
-		 else if(unit == POUND) return amount*1.49;
-		 else if(unit == YEN) return amount*120.07;
-		 else System.out.println("Invalid unit to convert to dollars");
+		switch(this.unit) {
+			case DOLLAR:return amount;
+			case POUND: return amount/.68;
+			case YEN: return amount/120.07;
+		}
 		return getDollars();
 	}
 	
 	public double getPounds() {
-		if(unit == POUND) return amount;
-		else if(unit == DOLLAR) return amount*.68;
-		else if(unit  == YEN) return amount*177.88;
-		else System.out.println("Invalid unit to convert");
+		switch(this.unit) {
+			case DOLLAR: return amount*.68;
+			case POUND: return amount;
+			case YEN: return (amount/120.07)*.68;
+		}
 		return getPounds();
 	}
 	
 	public double getYen() {
-		if(unit == YEN) return amount;
-		else if(unit == DOLLAR) return amount*.0084;
-		else if(unit  == POUND) return amount*.0056;
-		else System.out.println("Invalid unit to convert");
+		switch(this.unit) {
+			case DOLLAR: return amount*120.07;
+			case POUND: return amount/.68*120.07;
+			case YEN: return amount;
+		}
 		return getYen();
 	}
 	
 	public boolean equals(Currency otherAmount) {
 		double tempAmount1 = this.amount;
 		double tempAmount2 = otherAmount.amount;
-		
-		if(otherAmount.unit == DOLLAR) {
-			tempAmount1 = getDollars();
-				return tempAmount1 == tempAmount2;
-		}
-		else if(otherAmount.unit == POUND){
-			tempAmount1 = getPounds();
+
+		switch(otherAmount.unit) {
+		case DOLLAR: tempAmount1 = getDollars();
 			return tempAmount1 == tempAmount2;
-		}
-		else if(otherAmount.unit == YEN) {
-			tempAmount1 = getYen();
+		case POUND: tempAmount1 = getPounds();
+			return tempAmount1 == tempAmount2;
+		case YEN: tempAmount1 = getYen();
 			return tempAmount1 == tempAmount2;
 		}
 		return this.equals(otherAmount);
@@ -96,17 +96,14 @@ public class Currency {
 		double temp1 = this.amount;
 		double temp2 = otherAmount.amount;
 		
-			if(otherAmount.unit == DOLLAR) {
-				temp1 = getDollars();
-				return temp1 < temp2;
-			}
-			else if(otherAmount.unit == POUND) {
-				temp1 = getPounds();
-				return temp1 < temp2;
-			} else if(otherAmount.unit == YEN) {
-				temp1 = getYen();
-				return temp1 < temp2;
-			}
+		switch(otherAmount.unit) {
+		case DOLLAR: temp1 = getDollars();
+			return temp1 < temp2;
+		case POUND: temp1 = getPounds();
+			return temp1 < temp2;
+		case YEN: temp1 = getYen();
+			return temp1 < temp2;
+		}
 		return this.lessThan(otherAmount);
 	}
 	
@@ -114,26 +111,48 @@ public class Currency {
 		double temp1 = this.amount;
 		double temp2 = otherAmount.amount;
 		
-			if(otherAmount.unit == DOLLAR) {
-				temp1 = getDollars();
-				return temp1 > temp2;
-			}
-			else if(otherAmount.unit == POUND) {
-				temp1 = getPounds();
-				return temp1 > temp2;
-			} else if(otherAmount.unit == YEN) {
-				temp1 = getYen();
-				return temp1 > temp2;
-			}
+		switch(otherAmount.unit) {
+		case DOLLAR: temp1 = getDollars();
+			return temp1 > temp2;
+		case POUND: temp1 = getPounds();
+			return temp1 > temp2;
+		case YEN: temp1 = getYen();
+			return temp1 > temp2;
+		}
 		return this.greaterThan(otherAmount);
 	}
 	
 	public void deposit(Currency amount) {
-		
+		if(this.unit != amount.unit) {
+			if(this.unit == DOLLAR) {
+				double temp = amount.getDollars();
+				this.amount += temp;
+			}else if(this.unit == POUND) {
+				double temp = amount.getPounds();
+				this.amount += temp;
+			}else if(this.unit == YEN) {
+				double temp = amount.getYen();
+				this.amount += temp;
+			}
+		} else 
+			this.amount += amount.amount;
 	}
 	
 	public void withdraw(Currency amount) {
 		
+		if(this.unit != amount.unit) {
+			if(this.unit == DOLLAR) {
+				double temp = amount.getDollars();
+				this.amount -= temp;
+			}else if(this.unit == POUND) {
+				double temp = amount.getPounds();
+				this.amount -= temp;
+			}else if(this.unit == YEN) {
+				double temp = amount.getYen();
+				this.amount -= temp;
+			}
+		} else
+			this.amount -= amount.amount;
 	}
 	
 	public void printInDollars() {
@@ -145,7 +164,7 @@ public class Currency {
 	}
 	
 	public void printInYen() {
-		System.out.println(YEN + "" + df.format(getYen()));
+		System.out.println(YEN + "" + df.format(this.getYen()));
 	}
 	
 }
