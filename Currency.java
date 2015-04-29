@@ -89,6 +89,8 @@ public class Currency {
 			case DOLLAR:return amount;
 			case POUND: return amount/.68;
 			case YEN: return amount/120.07;
+			default: System.out.println("Invalid unit");
+				break;
 		}
 		return getDollars();
 	}
@@ -102,6 +104,8 @@ public class Currency {
 			case DOLLAR: return amount*.68;
 			case POUND: return amount;
 			case YEN: return (amount/120.07)*.68;
+			default: System.out.println("Invalid unit");
+				break;
 		}
 		return getPounds();
 	}
@@ -115,6 +119,8 @@ public class Currency {
 			case DOLLAR: return amount*120.07;
 			case POUND: return amount/.68*120.07;
 			case YEN: return amount;
+			default: System.out.println("Invalid unit");
+				break;
 		}
 		return getYen();
 	}
@@ -137,6 +143,8 @@ public class Currency {
 			return tempAmount1 == tempAmount2;
 		case YEN: tempAmount1 = getYen();
 			return tempAmount1 == tempAmount2;
+		default: System.out.println("Invalid unit");
+			break;
 		}
 		return this.equals(otherAmount);
 	}
@@ -159,6 +167,8 @@ public class Currency {
 			return temp1 < temp2;
 		case YEN: temp1 = getYen();
 			return temp1 < temp2;
+		default: System.out.println("Invalid unit");
+			break;
 		}
 		return this.lessThan(otherAmount);
 	}
@@ -181,6 +191,8 @@ public class Currency {
 			return temp1 > temp2;
 		case YEN: temp1 = getYen();
 			return temp1 > temp2;
+		default: System.out.println("Invalid unit");
+			break;
 		}
 		return this.greaterThan(otherAmount);
 	}
@@ -200,7 +212,8 @@ public class Currency {
 			}else if(this.unit == YEN) {
 				double temp = amount.getYen();
 				this.amount += temp;
-			}
+			} else
+				System.out.println("Invalid unit");
 		} else 
 			this.amount += amount.amount;
 	}
@@ -220,7 +233,8 @@ public class Currency {
 			}else if(this.unit == YEN) {
 				double temp = amount.getYen();
 				this.amount -= temp;
-			}
+			} else
+				System.out.println("Invalid unit");
 		} else
 			this.amount -= amount.amount;
 	}
