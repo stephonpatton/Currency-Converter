@@ -122,7 +122,7 @@ public class Currency {
 			default: System.out.println("Invalid unit");
 				break;
 		}
-		return getYen();
+		return 0;
 	}
 	/**
 	 * Determines if two Currency objects are
@@ -150,7 +150,7 @@ public class Currency {
 	}
 	/**
 	 * Determines if the <i>object</i> is less than
-	 *  <i>otherobject</i>.<br>
+	 *  <i>otherObject</i>.<br>
 	 * This method converts the two objects to the 
 	 * same unit then checks to see if <i>object1 < otherAmount</i>
 	 * @param otherAmount
@@ -174,7 +174,7 @@ public class Currency {
 	}
 	/**
 	 * Determines if the <i>object</i> is greater than 
-	 * <i>otherobject</i>.<br>
+	 * <i>otherObject</i>.<br>
 	 * This method converts the two objects to the same unit then 
 	 * checks to see if <i>object1 > otherAmount</i>
 	 * @param otherAmount

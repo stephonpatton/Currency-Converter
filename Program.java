@@ -16,6 +16,8 @@ public class Program {
 		int size = keyboard.nextInt();
 		Currency[] currs = new Currency[size];
 		
+		//for loop that creates Currency objects and then 
+		//prints the values in the other units back out
 		for(int i = 0; i<size; i++) {
 			System.out.println("What is the value of Currency " + i + "? \n(Amount first separated by space; 36 for dollars, 163 for pounds, 165 for yen");
 			double value = keyboard.nextDouble();
@@ -44,6 +46,5 @@ public class Program {
 			}
 		}//end of for loop
 		keyboard.close();
-		
 	}
 }
